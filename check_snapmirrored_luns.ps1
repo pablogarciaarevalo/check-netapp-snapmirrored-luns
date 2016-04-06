@@ -65,9 +65,6 @@ foreach ($snapmirror in $snapmirrorList) {
     $lun_serial_destination.Add($destinationLunPath, $destinationLunSerial)
 }
 
-# Write-host "El de la primera LUN" $lun_serial_destination.Get_Item("/vol/vol1/lun1")
-#$lun_serial_destination
-
 # Connect to source cluster
 Write-Host "Connecting to cluster $sourceClusterName ... " -NoNewLine
 $conn = Connect-NcController -Name $sourceClusterIP -HTTPS -Credential $sourceCred
@@ -84,7 +81,6 @@ Write-Host
 $matched = "true"
 
 foreach ($h in $lun_serial_destination.GetEnumerator()) {
-    # Write-Host "$($h.Name): $($h.Value)"
     if ([string]::IsNullOrEmpty($($h.Name))) {}
     else {
         Write-Host "Checking the serial number for the LUN "$($h.Name) "... " -NoNewLine
